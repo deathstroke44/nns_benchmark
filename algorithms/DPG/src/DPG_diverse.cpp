@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <type_traits>
 #include <boost/timer/timer.hpp>
-#include <boost/tr1/random.hpp>
+#include <boost/random.hpp>
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
