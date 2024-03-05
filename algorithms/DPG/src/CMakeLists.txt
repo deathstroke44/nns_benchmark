@@ -9,10 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 # Boost
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS timer chrono system program_options)
 if (Boost_FOUND)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${Boost_C_FLAGS}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Boost_CXX_FLAGS}")
     include_directories(${Boost_INCLUDE_DIRS})
 else()
     message(FATAL_ERROR "Boost dynamic-bitset is required")
@@ -44,13 +42,10 @@ set(HEADERS
     RandGen.h
 )
 
-# Common object files
-set(COMMON_FILES kgraph.o metric.o RandGen.o)
-
 # Executables
 foreach(source ${SOURCES})
     get_filename_component(name ${source} NAME_WE)
-    add_executable(${name} ${source} ${HEADERS} ${COMMON_FILES})
+    add_executable(${name} ${source} ${HEADERS})
     target_link_libraries(${name} ${Boost_LIBRARIES} ${OpenMP_CXX_LIBRARIES} m rt)
 endforeach(source)
 
